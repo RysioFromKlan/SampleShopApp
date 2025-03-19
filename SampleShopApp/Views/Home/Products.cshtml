@@ -25,9 +25,7 @@
                         <th>ID</th>
                         @if (ViewData["sessionUser"] != null)
                         {
-                           @*  <text> *@
                             <th class="text-center">---</th>
-                            @* </text> *@
                         }
                         <th>Title</th>
                         <th>Price</th>
@@ -69,24 +67,41 @@
             }
 
             function addToCart(productId) {
-                $.ajax({
-                    url: '/api/Cart/AddProduct',
-                    method: 'POST',
-                    //data: {  productId: productId },
-                    data: JSON.stringify({ productId: productId}),
-                    contentType: "application/json; charset=utf-8",
-                    success: function (response) {
-                        if (response === 'Success') {
-                           $('[data-product-id="'+productId+'"]').css("background-color","green");
-                        } else {
-                            alert('Error adding product to cart.');
-                        }
-                    },
-                    error: function (error) {
-                        console.error('Error adding product to cart:', error);
+            //Change background to flashing gray before loading data
+            var $product = $('[data-product-id="' + productId + '"]');
+            $product.css("background-color", "#d3d3d3").animate({ backgroundColor: "#ffffff" }, 500).animate({ backgroundColor: "#d3d3d3" }, 500);
+
+            $.ajax({
+                url: '/api/Cart/AddProduct',
+                method: 'POST',
+                data: JSON.stringify({ productId: productId }),
+                contentType: "application/json; charset=utf-8",
+                success: function (response) {
+                    if (response === 'Success') {
+                        // If response is 'Success', change background to green for 5 seconds
+                        $product.css("background-color", "green").delay(5000).queue(function(next) {
+                            $(this).css("background-color", ""); // Reset background color
+                            next();
+                        });
+                    } else {
+                        // On any error, change background to red for 5 seconds
+                        $product.css("background-color", "red").delay(5000).queue(function(next) {
+                            $(this).css("background-color", ""); // Reset background color
+                            next();
+                        });
                     }
-                });
-            }
+                },
+                error: function (error) {
+                    console.error('Error adding product to cart:', error);
+                    // On any error, change background to red for 5 seconds
+                    $product.css("background-color", "red").delay(5000).queue(function(next) {
+                        $(this).css("background-color", ""); // Reset background color
+                        next();
+                    });
+                }
+            });
+        }
+
 
             function loadProducts(page, size) {
                 $.ajax({

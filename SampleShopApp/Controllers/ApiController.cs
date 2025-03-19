@@ -109,6 +109,12 @@ namespace SampleShopApp.Controllers
         [HttpPost("AddProduct")]
         public SendStatus AddProduct([FromBody] LocalProduct product)
         {
+            #if (DEBUG)
+            Random rnd = new Random();
+            int dice = rnd.Next(1000, 5000);
+            Thread.Sleep(5000);
+            #endif
+
             try
             {
                 var sessionUser = UserService.GetNameFromUsersession(User);
@@ -164,7 +170,7 @@ namespace SampleShopApp.Controllers
                     throw new Exception("No cart");
                 if (product.quantity < 1)
                     throw new Exception("Wrong quantity");
-                CartService.ChangeQuantity(ref user, product.productId,product.quantity);
+                CartService.ChangeQuantity(ref user, product.productId, product.quantity);
 
                 UserService.SaveCartToExternalApi(user, user.cart);
                 return SendStatus.Success;

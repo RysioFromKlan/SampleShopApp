@@ -1118,11 +1118,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\admin\\source\\repos\\SampleShopApp\\SampleShopApp\\SampleShopApp.csproj",
+      "projectUniqueName": "C:\\Users\\admin\\source\\repos\\SampleShopAppGit\\SampleShopApp\\SampleShopApp.csproj",
       "projectName": "SampleShopApp",
-      "projectPath": "C:\\Users\\admin\\source\\repos\\SampleShopApp\\SampleShopApp\\SampleShopApp.csproj",
+      "projectPath": "C:\\Users\\admin\\source\\repos\\SampleShopAppGit\\SampleShopApp\\SampleShopApp.csproj",
       "packagesPath": "C:\\Users\\admin\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\admin\\source\\repos\\SampleShopApp\\SampleShopApp\\obj\\",
+      "outputPath": "C:\\Users\\admin\\source\\repos\\SampleShopAppGit\\SampleShopApp\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
